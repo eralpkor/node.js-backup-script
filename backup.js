@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // **********************
 // Simple Node.js Backup script
 // @Author: Eralp Kor
@@ -6,12 +7,47 @@
 // If files set read only attribute they will not be copied
 // If destination file same as source it will be overwritten 
 
+// Color references 
+const Reset = "\x1b[0m";
+const Red = "\x1b[31m";
+const Blue = "\x1b[34m";
+const Green = "\u001b[36m";
+
 const fs = require('fs');
 const path = require('path');
+const args = require('yargs');
 const now = (new Date()).toJSON().slice(0, 16).replace(/[-T]/g, '-');
+
+args.option({
+  'src': {
+    alias: 's',
+    describe: 'provide a path to copy files from.',
+    demandOption: true
+  },
+  'dest': {
+    alias: 'd',
+    describe: 'provide a path to copy files to.',
+    demandOption: true
+  },
+  'version': {
+    alias: 'v'
+  }
+})
+.usage('Usage: --src or -s [string] --dest or -d [string]')
+// .coerce(['src', 'dest'], path.resolve)
+// .demandOption(['src', 'dest'], 'Please provide both source path and destination path arguments to work with this tool.')
+.help()
+.argv
+
+console.log(args.argv.p, args.argv.d)
+
 // Add your own source and destination paths.
-const sourcePath = 'C:\\Users\\';
-const destinationPath = '\\\\network_drive\\';
+// const sourcePath = 'C:\\Users\\Eralp\\Desktop\\fullstack-dev\\';
+// const destinationPath = '\\\\KOR-NAS\\iTunes\\my_backup\\';
+
+var sourcePath = args.argv.s;
+var destinationPath = args.argv.d;
+console.log(sourcePath, destinationPath)
 
 function getDestinationPath(baseDirectory) {
   const date = (new Date()).toJSON().slice(0, 10).replace(/[-T]/g, '-');
@@ -39,13 +75,13 @@ async function copyEverything(src, dest) {
       try {
         await copyEverything(srcPath, destPath);
       } catch (err) {
-        console.log(`\x1b[31mSomething went wrong ${err}`);
+        console.log(`${Red}Something went wrong ${err}${Reset}`);
       }
     } else {
       try {
         await fs.copyFileSync(srcPath, destPath);
       } catch (err) {
-        console.log(`\x1b[31mCannot finish the backup ${err}`);
+        console.log(`${Red}Cannot finish the backup ${err}${Reset}`);
       }
     }
   }
@@ -53,19 +89,21 @@ async function copyEverything(src, dest) {
 
 // Run backup script and time stamp
 async function backup() {
-  console.log(`\x1b[34mBackup started: ${now}`);
+  console.log(`${Blue}Backup started: ${now}${Reset}`);
   let dest = getDestinationPath(destinationPath);
   try {
     await copyEverything(sourcePath, dest);
   } catch (error) {
-    console.log(`\x1b[31mCannot write log files: ${error}`);
+    console.log(`${Red}Cannot write log files: ${error} ${Reset}`);
   }
 }
 
 backup()
   .then(() => {
-    console.log(`Backup ended: ${now}`);
+    console.log(`${Green}Backup ended: ${now} ${Reset}`);
   })
   .catch((err) => {
-    console.log(`\x1b[31m Did not work... ${err}`);
+    console.log(`${Red}Did not work... ${err} ${Reset}`);
   });
+
+// EOF  

@@ -1,0 +1,29 @@
+{
+  "name": "backup-files",
+  "version": "0.0.2",
+  "description": "copy backup files folders with node.js",
+  "main": "backup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eralpkor/node.js-backup-script.git"
+  },
+  "keywords": [
+    "backup",
+    "copy",
+    "files",
+    "folders",
+    "node.js"
+  ],
+  "author": "eralpkor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eralpkor/node.js-backup-script/issues"
+  },
+  "homepage": "https://github.com/eralpkor/node.js-backup-script#readme",
+  "dependencies": {
+    "yargs": "^13.2.4"
+  }
+}
