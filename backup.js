@@ -3,7 +3,8 @@
 // Simple Node.js Backup script
 // @Author: Eralp Kor
 // *********************
-// Change sourcePath and destinationPath to backup files
+// Usage: --src or -s [string] --dest or -d [string]
+// node backup.js --help
 // If files set read only attribute they will not be copied
 // If destination file same as source it will be overwritten 
 
