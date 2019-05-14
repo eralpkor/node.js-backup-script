@@ -18,6 +18,7 @@ const path = require('path');
 const args = require('yargs');
 const now = (new Date()).toJSON().slice(0, 16).replace(/[-T]/g, '-');
 
+// Get user inputs, src and dest paths.
 args.option({
   'src': {
     alias: 's',
@@ -34,20 +35,11 @@ args.option({
   }
 })
 .usage('Usage: --src or -s [string] --dest or -d [string]')
-// .coerce(['src', 'dest'], path.resolve)
-// .demandOption(['src', 'dest'], 'Please provide both source path and destination path arguments to work with this tool.')
 .help()
 .argv
 
-console.log(args.argv.p, args.argv.d)
-
-// Add your own source and destination paths.
-// const sourcePath = 'C:\\Users\\Eralp\\Desktop\\fullstack-dev\\';
-// const destinationPath = '\\\\KOR-NAS\\iTunes\\my_backup\\';
-
 var sourcePath = args.argv.s;
 var destinationPath = args.argv.d;
-console.log(sourcePath, destinationPath)
 
 function getDestinationPath(baseDirectory) {
   const date = (new Date()).toJSON().slice(0, 10).replace(/[-T]/g, '-');
