@@ -1,4 +1,4 @@
-# node.js backup snd copy script
+# node.js backup & copy script
 
 Usage: --src or -s [string] --dest or -d [string]
 
