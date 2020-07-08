@@ -10,3 +10,5 @@ Options:
 
 If files set read only attribute they will not be copied
 If destination file same as source it will be overwritten 
+
+Script doesn't try to do anything fancy with permissions etc. Just a simple copy of each file.
